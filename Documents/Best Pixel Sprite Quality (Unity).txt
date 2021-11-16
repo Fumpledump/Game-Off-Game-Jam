@@ -1,0 +1,5 @@
+1. Change Filter Mode to Point (No Filter)
+2. Change Compression to None
+3. Consider Changing Pixels Per Unit depending on Tiles
+4. If it is a Sprite Sheet Change Sprite Mode To Multiple
+5. (Sprite Sheet) Slice Up Spites in Equal Sizes

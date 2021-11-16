@@ -1,0 +1,70 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [Header("Player Settings")]
+    public float runSpeed = 40f;
+
+    [Header("Components")]
+    public CharacterController2D controller;
+    public PlayerInputActions playerInput;
+
+    // Player Input
+    private InputAction movement;
+
+    // Update Transfer Variables
+    float horizontalMove = 0f;
+    bool jump = false;
+
+    // Awake is called when the script instance is being loaded.
+    void Awake()
+    {
+        // If Component is Empty it automatically grabs it.
+        if(controller == null) controller = GetComponent<CharacterController2D>();
+        if (playerInput == null) playerInput = new PlayerInputActions();
+
+    }
+    // This function is called when the object becomes enabled and active.
+    void OnEnable()
+    {
+        movement = playerInput.Player.Movement;
+        movement.Enable();
+
+        playerInput.Player.Jump.performed += DoJump;
+        playerInput.Player.Jump.Enable();
+    }
+
+    void DoJump(InputAction.CallbackContext obj)
+    {
+        jump = true;
+    }
+
+    // This function is called when the behaviour becomes disabled.
+    void OnDisable()
+    {
+        movement.Disable();
+        playerInput.Player.Jump.Disable();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        horizontalMove = movement.ReadValue<Vector2>().x * runSpeed;
+    }
+
+    void FixedUpdate()
+    {
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        jump = false;
+    }
+}
