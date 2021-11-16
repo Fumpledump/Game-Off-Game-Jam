@@ -11,9 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     public CharacterController2D controller;
-    public PlayerInputActions playerInput;
 
     // Player Input
+    private PlayerInputActions playerInput;
     private InputAction movement;
 
     // Update Transfer Variables
@@ -25,8 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // If Component is Empty it automatically grabs it.
         if(controller == null) controller = GetComponent<CharacterController2D>();
-        if (playerInput == null) playerInput = new PlayerInputActions();
-
+        playerInput = new PlayerInputActions();
     }
     // This function is called when the object becomes enabled and active.
     void OnEnable()
