@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     public CharacterController2D controller;
+    public Animator animator;
 
     // Player Input
     private PlayerInputActions playerInput;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // If Component is Empty it automatically grabs it.
         if(controller == null) controller = GetComponent<CharacterController2D>();
+        if(animator == null) animator = GetComponent<Animator>();
         playerInput = new PlayerInputActions();
     }
     // This function is called when the object becomes enabled and active.
@@ -40,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
     void DoJump(InputAction.CallbackContext obj)
     {
         jump = true;
+        animator.SetBool("Jump", true);
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("Jump", false);
     }
 
     // This function is called when the behaviour becomes disabled.
@@ -58,7 +66,18 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Running
         horizontalMove = movement.ReadValue<Vector2>().x * runSpeed;
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        // Jumping
+        if (controller.m_Grounded == false)
+        {
+            animator.SetBool("Jump", !controller.m_Grounded);
+        }
+        else
+        {
+            animator.SetBool("Jump", !controller.m_Grounded);
+        }
     }
 
     void FixedUpdate()

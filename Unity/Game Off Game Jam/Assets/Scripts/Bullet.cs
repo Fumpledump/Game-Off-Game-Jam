@@ -29,6 +29,6 @@ public class Bullet : MonoBehaviour
         */
         // Partical Effect After Hit
         // Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
