@@ -857,6 +857,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 355062442}
   m_CeilingCheck: {fileID: 2038088420}
   m_CrouchDisableCollider: {fileID: 0}
+  m_Grounded: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -869,7 +870,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: OnLanding()
           m_BoolArgument: 0
         m_CallState: 2
   OnCrouchEvent:

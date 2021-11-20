@@ -25,7 +25,6 @@ public class Bullet : MonoBehaviour
         {
             enemy.TakeDamage(damage);
         }
-
         */
         // Partical Effect After Hit
         // Instantiate(impactEffect, transform.position, transform.rotation);
