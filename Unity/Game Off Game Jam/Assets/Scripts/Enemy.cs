@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class Enemy : MonoBehaviour
                 {
                     Destroy(gameObject);
                 }
+                else
+                {
+                    StartCoroutine(Win());
+                }
             }
             else
             {
@@ -38,5 +43,10 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(death.length);
         Destroy(gameObject);
+    }
+    IEnumerator Win()
+    {
+        yield return new WaitForSeconds(8);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
