@@ -6,8 +6,10 @@ public class Enemy : MonoBehaviour
 {
     [Header("Enemy Settings")]
     public int health = 3;
+    public bool getsDestroyed = true;
     [Header("Components")]
     public Animator animator;
+    public AnimationClip death;
 
     public void TakeDamage (int damage)
     {
@@ -17,7 +19,24 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             animator.SetInteger("Health", 0);
-            Destroy(gameObject);
+            if(death == null)
+            {
+                if (getsDestroyed)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                StartCoroutine(Death());
+            }
+
         }
+    }
+
+    IEnumerator Death()
+    {
+        yield return new WaitForSeconds(death.length);
+        Destroy(gameObject);
     }
 }

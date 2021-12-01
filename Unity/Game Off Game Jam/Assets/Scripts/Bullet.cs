@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        BulletDeath();
+        StartCoroutine(BulletDeath());
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator BulletDeath()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
 }
