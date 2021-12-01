@@ -21,6 +21,11 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        if (hitInfo.tag == "Player")
+        {
+            return;
+        }
+
         rb.velocity = transform.position;
 
         Enemy enemy = hitInfo.GetComponent<Enemy>();

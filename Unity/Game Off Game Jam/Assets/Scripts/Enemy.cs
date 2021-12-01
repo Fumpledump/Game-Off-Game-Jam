@@ -5,21 +5,17 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    public int health = 100;
+    public int health = 3;
+    [Header("Components")]
+    public Animator animator;
 
     public void TakeDamage (int damage)
     {
         health -= damage;
 
-        if(health <= 0)
+        if (health <= 0)
         {
-            Die();
+            Destroy(gameObject);
         }
-    }
-
-    void Die()
-    {
-        //StartCoroutine(red());
-        Destroy(gameObject);
     }
 }
