@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public AnimationClip deathAnimation;
     public Rigidbody2D rb;
+    public AudioSource backgroundMusic;
 
     // Player Input
     private PlayerInputActions playerInput;
@@ -136,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetInteger("Health", 0);
             dead = true;
+            backgroundMusic.volume = 0;
         }
     }
 }

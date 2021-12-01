@@ -45,7 +45,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.032408714, y: -0.18479401}
@@ -85,7 +85,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4379451954249369242}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -110,10 +110,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5055c3639248f64ba58a8a11b6ba40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mustPatrol: 1
-  walkSpeed: 2
+  mustPatrol: 0
+  moveSpeed: 2
+  moveDirection: 1
+  facingRight: 1
+  circleRadius: 1
   rb: {fileID: 0}
   animator: {fileID: 592002929}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4379451954342588780
 GameObject:
   m_ObjectHideFlags: 0
