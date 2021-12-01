@@ -6,9 +6,12 @@ public class Bullet : MonoBehaviour
 {
     [Header("Bullet Settings")]
     public float speed = 20f;
+    public int damage = 50;
 
     [Header("Components")]
     public Rigidbody2D rb;
+    public Animator animator;
+    public AnimationClip bulletHit;
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +21,21 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        // Future Enemy Code
-        /*
+        rb.velocity = transform.position;
+
         Enemy enemy = hitInfo.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(damage);
         }
-        */
-        // Partical Effect After Hit
-        // Instantiate(impactEffect, transform.position, transform.rotation);
-        //Destroy(gameObject);
+
+        StartCoroutine(DestroyBullet());
+        DestroyBullet();
+    }
+    IEnumerator DestroyBullet()
+    {
+        animator.SetBool("Hit", true);
+        yield return new WaitForSeconds(bulletHit.length);
+        Destroy(gameObject);
     }
 }

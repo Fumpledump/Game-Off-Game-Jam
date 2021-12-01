@@ -120,7 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  damage: 1
   rb: {fileID: 6816583816726734129}
+  animator: {fileID: 8324974300997636237}
+  bulletHit: {fileID: 7400000, guid: a14df7cfa0f003a4793d7e77a5c9299a, type: 2}
 --- !u!61 &758868049945016549
 BoxCollider2D:
   m_ObjectHideFlags: 0
