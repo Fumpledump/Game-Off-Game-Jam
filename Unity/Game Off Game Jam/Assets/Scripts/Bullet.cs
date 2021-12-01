@@ -19,6 +19,11 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
+    private void Update()
+    {
+        BulletDeath();
+    }
+
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo.tag == "Player")
@@ -26,21 +31,25 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        rb.velocity = transform.position;
-
         Enemy enemy = hitInfo.GetComponent<Enemy>();
         if (enemy != null)
         {
+            rb.velocity = transform.position;
             enemy.TakeDamage(damage);
+            StartCoroutine(DestroyBullet());
+            DestroyBullet();
         }
-
-        StartCoroutine(DestroyBullet());
-        DestroyBullet();
     }
     IEnumerator DestroyBullet()
     {
         animator.SetBool("Hit", true);
         yield return new WaitForSeconds(bulletHit.length);
+        Destroy(gameObject);
+    }
+
+    IEnumerator BulletDeath()
+    {
+        yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 }

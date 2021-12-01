@@ -64,6 +64,10 @@ public class CharacterController2D : MonoBehaviour
                 {
 					transform.parent = c.transform;
                 }
+                else
+                {
+					transform.parent = null;
+                }
             }
 		}
 	}

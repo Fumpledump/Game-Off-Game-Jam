@@ -12,9 +12,11 @@ public class Enemy : MonoBehaviour
     public void TakeDamage (int damage)
     {
         health -= damage;
+        animator.SetInteger("Health", health);
 
         if (health <= 0)
         {
+            animator.SetInteger("Health", 0);
             Destroy(gameObject);
         }
     }
