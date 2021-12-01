@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
         {
             glide = true;
             animator.SetBool("Glide", true);
-            rb.velocity = transform.position / 2;
         }
     }
 
@@ -97,8 +96,6 @@ public class PlayerMovement : MonoBehaviour
         // Jumping
         if (controller.m_Grounded == false)
         {
-            float oldSpeed = runSpeed;
-            float oldScale = rb.gravityScale;
             if (glide)
             {
                 rb.gravityScale = 0.2f;

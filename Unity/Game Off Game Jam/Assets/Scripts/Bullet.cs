@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator BulletDeath()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 }

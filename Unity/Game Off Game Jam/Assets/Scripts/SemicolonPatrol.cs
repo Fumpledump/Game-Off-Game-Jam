@@ -5,14 +5,18 @@ using UnityEngine;
 public class SemicolonPatrol : MonoBehaviour
 {
     [Header("Enemy Settings")]
-    public List<Transform> points;
-    public Transform enemy;
     public bool mustPatrol = true;
-    public float walkSpeed = 2f;
+    public float moveSpeed = 2f;
+    public float moveDirection = 1;
+    public bool facingRight = true;
+    public float circleRadius = 1f;
     public Rigidbody2D rb;
     public Animator animator;
-    // Enemy
-    int goalPoint = 0;
+    public LayerMask groundLayer;
+
+    private bool grounded = true;
+    private bool noObstacle = true;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -27,37 +31,41 @@ public class SemicolonPatrol : MonoBehaviour
         if (mustPatrol)
         {
             Patrol();
-            MoveToNextPoint();
         }
+    }
+
+    private void FixedUpdate()
+    {
     }
 
     public void Patrol()
     {
-        rb.velocity = new Vector2(walkSpeed * Time.fixedDeltaTime, rb.velocity.y);
+        if(!grounded || !noObstacle)
+        {
+            if(facingRight)
+            {
+                Flip();
+            }else if(!facingRight)
+            {
+                Flip();
+            }
+        }
+        rb.velocity = new Vector2(moveSpeed * moveDirection, rb.velocity.y);
     }
 
     private void Flip()
     {
-        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
-        walkSpeed *= -1;
+        StartCoroutine(RestStop());
+        moveSpeed *= -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
 
-    private void MoveToNextPoint()
+    IEnumerator RestStop()
     {
-        // Change the position of the platform (move towards the goal point)
-        enemy.position = Vector2.MoveTowards(enemy.position, points[goalPoint].position, 1 * Time.deltaTime * walkSpeed);
+        animator.SetBool("moving", false);
+        yield return new WaitForSeconds(5);
+        animator.SetBool("moving", true);
 
-        // Check if we are in very close proximity of the next point
-        if (Vector2.Distance(enemy.position, points[goalPoint].position) < 0.1f)
-        {
-            if (goalPoint == points.Count - 1)
-            {
-                goalPoint = 0;
-            }
-            else
-            {
-                goalPoint++;
-            }
-        }
     }
 }
